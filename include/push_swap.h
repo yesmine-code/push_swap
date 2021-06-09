@@ -27,10 +27,14 @@ int     shift_down(t_element **elem);
 int     check_if_int(char *arg);
 void    ft_error();
 int     check_if_doublon(t_element *elem);
-int     find_min(t_element *elem);
-void    move_min_up(t_element **elem, int pos);
+int     find_min_max(t_element *elem, int choice);
+void    move_min_max_up(t_element **elem, int pos);
 int     is_sorted(t_element *elem);
 void    sort_list(t_element **list_a, t_element **list_b);
+void    sort_five(t_element **list_a, t_element **list_b);
+void    sort_three(t_element **list_a);
+
+
 
 
 

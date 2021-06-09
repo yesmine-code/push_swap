@@ -1,24 +1,31 @@
 #include "include/push_swap.h"
 
-int find_min(t_element *elem)
+int find_min_max(t_element *elem, int choice)
 {
-    int min;
+    int min_max;
     int j;
     int size;
     int pos;
     t_element *list;
 
+    if(elem == NULL)
+        return 0;
     j = 1;
     pos = 0;
     list = elem;
-    min = list->value;
+    min_max = list->value;
     size = ft_elem_size(elem);
     while(j < size && list->next != NULL)
     {
         list = list->next;
-        if(list->value < min)
+        if(choice == 0 && list->value < min_max)
         {
-            min = list->value;
+            min_max = list->value;
+            pos = j;
+        }
+        else if(choice == 1 && list->value > min_max)
+        {
+            min_max = list->value;
             pos = j;
         }
         j++;
@@ -26,7 +33,7 @@ int find_min(t_element *elem)
     return pos;
 }
 
-void move_min_up(t_element **elem, int pos)
+void move_min_max_up(t_element **elem, int pos)
 {
     int i;
     int size;

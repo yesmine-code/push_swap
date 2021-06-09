@@ -1,5 +1,19 @@
 #include "include/push_swap.h"
 
+int is_the_biggest(t_element *list, int a)
+{
+    t_element *elem;
+    elem = list;
+    if(list == NULL)
+        return 1;
+    while(elem->next != NULL)
+    {
+        if(a < elem->value)
+            return 0;
+        elem = elem->next;
+    }
+    return 1;
+}
 
 void get_min_max(t_element *elem, int *min, int *max)
 {
@@ -38,7 +52,7 @@ int wich_chunk(int c, int min, int max)
    
     i = 1;
     chunk_num = get_chunk_num(min, max);
-    while(i <= chunk_num)
+    while(i < chunk_num)
     {
         if (c < ((max - min) / chunk_num) * i)
             return i;
@@ -49,6 +63,7 @@ int wich_chunk(int c, int min, int max)
 
 void sort_list(t_element **list_a, t_element **list_b)
 {
+    int pos;
     t_element *last_elem;
     t_element *elem;
     int hold_first;
@@ -63,10 +78,8 @@ void sort_list(t_element **list_a, t_element **list_b)
     i = 0;
     get_min_max(*list_a, &min, &max);
     chunk_num = get_chunk_num(min, max);
-    last_elem = *list_a;
-    while(last_elem->next != NULL)
-            last_elem = last_elem->next;
-    while(chunk <= chunk_num)
+    
+    while(chunk <= chunk_num && ft_elem_size(*list_a) > 0)
     {
         hold_first = -1;
         hold_second = -1;
@@ -83,7 +96,12 @@ void sort_list(t_element **list_a, t_element **list_b)
             elem = elem->next;
         }
         i = ft_elem_size(*list_a) - 1;
+        
+        last_elem = *list_a;
+        while(last_elem->next != NULL)
+            last_elem = last_elem->next;
         elem = last_elem;
+
         while(i >= ft_elem_size(*list_a) / 2)
         {
             if(wich_chunk(elem->value, min, max) == chunk)
@@ -94,19 +112,32 @@ void sort_list(t_element **list_a, t_element **list_b)
             i--;
             elem = elem->back;
         }
-        if(hold_first != -1 && hold_first < ft_elem_size(*list_a) - hold_second)
+        if(hold_first != -1 && (hold_first < ft_elem_size(*list_a) - hold_second || hold_second == -1))
         {
-            move_min_up(list_a, hold_first);
+            move_min_max_up(list_a, hold_first);
+             if(is_the_biggest(*list_b, hold_first) == 1)
+            {
+                pos = find_min_max(*list_b, 0);
+                move_min_max_up(list_b, pos);
+            }
             stack_push(list_a, list_b);
             ft_putstr_fd("pb\n", 1);
         }
         else if(hold_second != -1)
         {
-            move_min_up(list_a, hold_second);
+            move_min_max_up(list_a, hold_second);
             stack_push(list_a, list_b);
             ft_putstr_fd("pb\n", 1);
         }
         else
             chunk++;
+    }
+
+    while (*list_b != NULL)
+    {
+        pos = find_min_max(*list_b, 1);
+        move_min_max_up(list_b, pos);
+        stack_push(list_b, list_a);
+        ft_putstr_fd("pa\n", 1);
     }
 }
