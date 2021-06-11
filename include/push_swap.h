@@ -28,11 +28,20 @@ int     check_if_int(char *arg);
 void    ft_error();
 int     check_if_doublon(t_element *elem);
 int     find_min_max(t_element *elem, int choice);
-void    move_min_max_up(t_element **elem, int pos);
-int     is_sorted(t_element *elem);
+void    move_min_max_up(t_element **elem, int pos, int choice, int min, int max);
+int     is_sorted(t_element *elem, int choice);
 void    sort_list(t_element **list_a, t_element **list_b);
 void    sort_five(t_element **list_a, t_element **list_b);
 void    sort_three(t_element **list_a);
+void    move_lists_up(t_element **elem1, int pos1, t_element **elem2, int pos2);
+int     wich_chunk(int c, int min, int max);
+int     get_chunk_num(int min, int max);
+void sort_three_reverse(t_element **list_b);
+
+
+
+
+
 
 
 

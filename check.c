@@ -34,10 +34,7 @@ int check_if_doublon(t_element *elem)
         {
             tmp2 = list2->value;
             if(tmp1 == tmp2)
-            {
-                printf("%d", tmp1);
                 return 0;
-            }
             list2 = list2->next;
         }
         list = list->next;
