@@ -114,18 +114,14 @@ void sort_list(t_element **list_a, t_element **list_b)
         }
         if(hold_first != -1 && (hold_first < ft_elem_size(*list_a) - hold_second || hold_second == -1))
         {
-         //   move_min_max_up(list_a, hold_first, 0);
             pos = find_min_max(*list_b, 1);
-         //   move_min_max_up(list_b, pos, 1);
             move_lists_up(list_a, hold_first, list_b, pos);
             stack_push(list_a, list_b);
             ft_putstr_fd("pb\n", 1);
         }
         else if(hold_second != -1)
         {
-         //   move_min_max_up(list_a, hold_second, 0);
             pos = find_min_max(*list_b, 1);
-         //   move_min_max_up(list_b, pos, 1);
             move_lists_up(list_a, hold_second, list_b, pos);
             stack_push(list_a, list_b);
             ft_putstr_fd("pb\n", 1);
@@ -136,7 +132,7 @@ void sort_list(t_element **list_a, t_element **list_b)
     while(ft_elem_size(*list_a) > 5)
     {
         pos = find_min_max(*list_a, 0);
-        move_min_max_up(list_a, pos, 0, min, max);
+        move_min_max_up(list_a, pos, 0);
         stack_push(list_a, list_b);
         ft_putstr_fd("pb\n", 1);
     }
@@ -144,7 +140,7 @@ void sort_list(t_element **list_a, t_element **list_b)
     while (ft_elem_size(*list_b) > 3)
     {
         pos = find_min_max(*list_b, 1);
-        move_min_max_up(list_b, pos, 1, min, max);
+        move_min_max_up(list_b, pos, 1);
         stack_push(list_b, list_a);
         ft_putstr_fd("pa\n", 1);
     }

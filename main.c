@@ -52,7 +52,7 @@ void sort_five(t_element **list_a, t_element **list_b)
     while(ft_elem_size(*list_a) > 3)
     {
         pos = find_min_max(*list_a, 0);
-        move_min_max_up(list_a, pos, 0, 0, 0);
+        move_min_max_up(list_a, pos, 0);
         if(is_sorted(*list_a, 0) == 0)
         {
             stack_push(list_a, list_b);
@@ -148,14 +148,12 @@ int  main(int ac, char **av)
     if (ac == 4)
     {
        sort_three(&list_a);
-       display_list(list_a);
        free(list_a);
        exit(EXIT_SUCCESS);
     }
     if (ac <= 6)
     {
         sort_five(&list_a, &list_b);
-       // display_list(list_a);
         free(list_b);
         free(list_a);
         exit(EXIT_SUCCESS);

@@ -33,33 +33,13 @@ int find_min_max(t_element *elem, int choice)
     return pos;
 }
 
-void move_min_max_up(t_element **elem, int pos, int choice, int min, int max)
+void move_min_max_up(t_element **elem, int pos, int choice)
 {
     int i;
     int size;
 
     i = pos;
     size = ft_elem_size(*elem);
-    if( pos == 0)
-        return;
-    if(pos == 1 && choice == 0)
-    {
-        if(wich_chunk((*elem)->value, min, max) == wich_chunk((*elem)->next->value, min, max))
-        {
-            stack_swap(*elem);
-            ft_putstr_fd("sa\n", 1);
-            return;
-        }
-    }
-    if(pos == 1 && choice == 1)
-    {
-        if(wich_chunk((*elem)->value, min, max) == wich_chunk((*elem)->next->value, min, max))
-        {
-            stack_swap(*elem);
-            ft_putstr_fd("sb\n", 1);
-            return;
-        }
-    }
     if(pos < size / 2)
     {
         while(i > 0)
@@ -148,8 +128,8 @@ void move_lists_up(t_element **elem1, int pos1, t_element **elem2, int pos2)
    }
    else
    {
-       move_min_max_up(elem1, pos1, 0, 0, 0);
-       move_min_max_up(elem2, pos2, 1, 0, 0);
+       move_min_max_up(elem1, pos1, 0);
+       move_min_max_up(elem2, pos2, 1);
    }
 }
 
