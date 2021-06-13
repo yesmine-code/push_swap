@@ -13,7 +13,7 @@ int	check_if_int(char *arg)
 			return (0);
 		i++;
 	}
-	if (ft_atoi(arg) == -1 && ft_strncmp(arg, "-1", 2) != 0)
+	if (ft_atoi(arg) == -1 && ft_strlen(arg) > 2)
 		return (0);
 	return (1);
 }

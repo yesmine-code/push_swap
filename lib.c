@@ -29,7 +29,7 @@ int	ft_atoi(const char *nptr)
 	{
 		result = result * 10 + (nptr[index] - '0');
 		index++;
-		if (result > 2147483648 && sign == 1)
+		if (result > 2147483647 && sign == 1)
 			return (-1);
 		else if (result > 2147483648 && sign == -1)
 			return (-1);

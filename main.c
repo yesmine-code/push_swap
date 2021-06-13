@@ -78,13 +78,18 @@ void	sort_five(t_element **list_a, t_element **list_b)
 void	ft_sort(int ac, t_element *list_a, t_element *list_b)
 {
 	if (ac == 3 && list_a->value > list_a->next->value)
+	{
 		stack_swap(list_a);
-	if (ac == 4)
+		ft_putstr_fd("sa\n", 1);
+	}
+	else if (ac == 4)
 		sort_three(&list_a);
-	if (ac <= 6)
+	else if (ac <= 6 && is_sorted(list_a, 0) == 0)
 		sort_five(&list_a, &list_b);
-	else
+	else if (is_sorted(list_a, 0) == 0)
 		sort_list(&list_a, &list_b);
+	else
+		return ;
 }
 
 int	main(int ac, char **av)
