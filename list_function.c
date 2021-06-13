@@ -50,6 +50,7 @@ void	ft_add_element(t_element **elem, int new)
     if(new_elem == NULL)
         return;
     new_elem->value = new;
+    new_elem->next = NULL;
 	if (elem == NULL)
 		return ;
 	if (*elem == NULL)

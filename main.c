@@ -70,48 +70,6 @@ void sort_five(t_element **list_a, t_element **list_b)
         i--;
     }
 }
-void sort_three_reverse(t_element **list_b)
-{
-    int a;
-    int b;
-    int c;
-    t_element *elem;
-
-    elem = (*list_b)->next;
-    a = (*list_b)->value;
-    b = elem->value;
-    c = elem->next->value;
-
-    if(a > b  && a > c && b < c)
-    {
-        stack_swap(*list_b);
-        ft_putstr_fd("sb\n", 1);
-        shift_down(list_b);
-        ft_putstr_fd("rb\n", 1);
-    }
-    else if (a < b && a < c && c < b)
-    {
-        shift_down(list_b);
-        ft_putstr_fd("rb\n", 1);
-    }
-    else if(a < b && c < b && c < a)
-    {
-        stack_swap(*list_b);
-        ft_putstr_fd("sb\n", 1);
-    }
-    else if (c > a && c > b && a > b)
-    {
-       shift_up(list_b);
-       ft_putstr_fd("rrb\n", 1);
-    }
-    else if ( a < b && b < c && a < c)
-    {
-        stack_swap(*list_b);
-        ft_putstr_fd("sb\n", 1);
-        shift_up(list_b);
-        ft_putstr_fd("rrb\n", 1);
-    }
-}
 
 int  main(int ac, char **av)
 {
@@ -134,35 +92,30 @@ int  main(int ac, char **av)
     }
     if(check_if_doublon(list_a) == 0)
     {
+        while(list_a->next != NULL)
+            ft_elemdel(&list_a);
         free(list_a);
         ft_error();
     }
-    
     if (ac == 3)
     {
         element = list_a->next;
         if(list_a->value > element->value)
             stack_swap(list_a);
-        exit(EXIT_SUCCESS);
     }
     if (ac == 4)
-    {
        sort_three(&list_a);
-       free(list_a);
-       exit(EXIT_SUCCESS);
-    }
     if (ac <= 6)
-    {
         sort_five(&list_a, &list_b);
-        free(list_b);
-        free(list_a);
-        exit(EXIT_SUCCESS);
-    }
     else
         sort_list(&list_a, &list_b);
  //  display_list(list_a);
   //printf("\n-------------\n");
    //display_list(list_b);
+   while(list_a->next != NULL)
+        ft_elemdel(&list_a);
     free(list_a);
+    if(list_b != NULL)
+        free(list_b);
     exit(EXIT_SUCCESS);
 }

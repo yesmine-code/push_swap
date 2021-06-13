@@ -36,6 +36,7 @@ void    sort_three(t_element **list_a);
 void    move_lists_up(t_element **elem1, int pos1, t_element **elem2, int pos2);
 int     wich_chunk(int c, int min, int max);
 int     get_chunk_num(int min, int max);
+int     find_max2(t_element *elem);
 void sort_three_reverse(t_element **list_b);
 
 
